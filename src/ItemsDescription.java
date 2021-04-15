@@ -35,7 +35,7 @@ public class ItemsDescription {
 	
 	public String toString() {
 		String str = "";
-		str += description + "," + amount + "," + date;
+		str += date + "," + description + "," + amount;
 		return str;
 	}
 	

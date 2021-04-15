@@ -7,14 +7,17 @@ import java.util.Scanner;
  * once certain threshold (75% of $) user will be informed*/
 
 //menu based Change limit and threshold
-//           Enter New Transaction
-//           List all your Transactions by Dates
+//           Added new Transaction
+//           List Transactions by choosen dates 
+//			 Remove transactions based on Description, amount, date
+//           Save and exit
 
 //classes MoneyTracker(main) | Records.txt | ItemsDescription | Storage | limitAndThreshold | Dates
 //function to prompt user to enter ITEM: AMOUNT:
 //A file to store all the data in array
 //function to write user prompt into file
 //function to display records based on dates
+//implement GUI
 
 public class MoneyTracker {
 	private Scanner sc;
