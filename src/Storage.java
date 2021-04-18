@@ -8,6 +8,7 @@ public class Storage {
 		count = 0;
 	}
 	
+	
 	//Check whether spending is above threshold
 	public boolean threshold(float limit, float percentage) {
 		float total = 0;

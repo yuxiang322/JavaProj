@@ -27,7 +27,7 @@ public class ItemsDescription {
 		return date;
 	}
 	
-	public ItemsDescription(String description, float amount, Dates date) {
+	public ItemsDescription(Dates date, String description, float amount) {
 		this.description = description;
 		this.amount = amount;
 		this.date = date;
@@ -35,7 +35,7 @@ public class ItemsDescription {
 	
 	public String toString() {
 		String str = "";
-		str += date + "," + description + "," + amount;
+		str += date + "," + description + "," + amount + "\n";
 		return str;
 	}
 	

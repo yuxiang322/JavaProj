@@ -1,17 +1,20 @@
 
 public class limitAndThreshold {
-	private float limit;
-	private float percentage;
 	
-	public limitAndThreshold(float limit, float percentage) {
+	private int limit;
+	private float percentage;
+	private int count;
+	
+	public limitAndThreshold(int limit, float percentage) {
 		this.limit = limit;
 		this.percentage = percentage;
+		count = 0;
 	}
 	
-	public float getLimit() {
+	public int getLimit() {
 		return limit;
 	}
-	public float setLimit(float limit) {
+	public int setLimit(int limit) {
 		this.limit = limit;
 		return limit;
 	}
