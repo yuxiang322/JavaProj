@@ -1,20 +1,18 @@
 
 public class limitAndThreshold {
 	
-	private int limit;
+	private float limit;
 	private float percentage;
-	private int count;
 	
-	public limitAndThreshold(int limit, float percentage) {
+	public limitAndThreshold(float limit, float percentage) {
 		this.limit = limit;
 		this.percentage = percentage;
-		count = 0;
 	}
 	
-	public int getLimit() {
+	public float getLimit() {
 		return limit;
 	}
-	public int setLimit(int limit) {
+	public float setLimit(int limit) {
 		this.limit = limit;
 		return limit;
 	}
@@ -28,7 +26,11 @@ public class limitAndThreshold {
 	
 	public String toString() {
 		String str = "";
-		str = limit + "," + percentage;
+		
+		String lmt = String.valueOf(limit);
+		String perc = String.valueOf(percentage);
+		
+		str = "$"+ lmt + ", " + perc + "\n";
 		return str;
 	}
 }

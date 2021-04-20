@@ -79,6 +79,17 @@ public class Storage {
 		}
 		return true;
 	}
+	//check if records is null or not also returning the checked item.
+	public ItemsDescription checkitem(int i) {
+		
+		ItemsDescription item = null;
+		
+		if(records[i] != null) {
+			item = records[i];
+		}
+		
+		return item;
+	}
 	
 	public String toString(){
 		String str = "";

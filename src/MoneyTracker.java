@@ -1,5 +1,7 @@
 import java.io.*;
+import java.util.Calendar;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /* App that allow user to enter their spending
  * app will keep a record
@@ -26,14 +28,13 @@ public class MoneyTracker {
 	private Scanner sc;
 	
 	public MoneyTracker() throws Exception {
-		Scanner sctwo = new Scanner(System.in);
+		sc = new Scanner(System.in);
+		Scanner scTwo = new Scanner(System.in);
 		
 		int dLimit = 0;
 		float thres = 0;
 		
-		
 		storageArray = new Storage[1];
-		
 		storageArray[0] = new Storage();
 		
 		File file = new File("Records.txt");
@@ -49,9 +50,10 @@ public class MoneyTracker {
 			storageArray[0].addItem(record);
 			
 		}
-		//----------------------------------------------------------------------------------------------
-		limitArray = new LTStorage[1];
+		//--------------------------------------------------------------------------------------------------------------------
+		//Read second file for the limit and threshold amount
 		
+		limitArray = new LTStorage[1];
 		limitArray[0] = new LTStorage();
 		
 		File fileTwo = new File("Threshold.txt");
@@ -59,23 +61,23 @@ public class MoneyTracker {
 		BufferedReader brTwo = new BufferedReader(frTwo);
 		String strTwo;
 		
-		if((strTwo = br.readLine()) != null){
+		//if records exists add into limitArray for further use.
+		if((strTwo = brTwo.readLine()) != null){
 			
 			String arr[] = strTwo.split(",");
-			limitAndThreshold LandT = new limitAndThreshold(Integer.parseInt(arr[0]), Float.parseFloat(arr[1]));
+			limitAndThreshold LandT = new limitAndThreshold(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]));
 			
 			limitArray[0].addLT(LandT);
-			// add in a return so limitArray not null
 		}
-		
-		else if((strTwo = br.readLine()) == null) {
+		//if not existing records for limit and threshold prompt for 1 at the start of opening.
+		else if((strTwo = brTwo.readLine()) == null) {
 			float threshold;
 			
 			System.out.println("You have not set Daily limit and Threshold.\n");
 			System.out.println("Please Enter Daily Limit: $ ");
-			dLimit = sctwo.nextInt();
+			dLimit = scTwo.nextInt();
 			System.out.println("Please Enter Threshold in percent:% ");
-			thres = sctwo.nextFloat();
+			thres = scTwo.nextFloat();
 			
 			threshold = thres / 100;
 			
@@ -92,13 +94,80 @@ public class MoneyTracker {
 		System.out.println(limitArray[0]);
 		System.out.println(storageArray[0]);
 	}
+	
+	//insert Transaction button, will automatically gets the current date.
+	public void insertTransaction() {
+		Scanner scTwo = new Scanner(System.in);
+		
+		String description;
+		float amount;
+		
+		Calendar calendar = Calendar.getInstance();
+		int cyear = calendar.get(Calendar.YEAR);
+		int cmonth = calendar.get(Calendar.MONTH);
+		int cday = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		Dates date = new Dates(cyear, (cmonth + 1), cday);
+		
+		System.out.println("Enter description of item: ");
+		description = sc.nextLine();
+		System.out.println("Enter cost of item: ");
+		amount = Float.parseFloat(sc.nextLine());
+		
+		ItemsDescription item = new ItemsDescription(date, description, amount);
+		
+		storageArray[0].addItem(item);
+	}
+	//list all Transactions
+	public void listTransaction() {
+		System.out.println(storageArray[0]);
+	}
+	//list Transaction by the Date (try to add Items into arraylist)
+	public void listTransactionByDate() {
+		
+		int i = 0;
+		int year;
+		int month;
+		int day;
+		
+		
+		System.out.println("Enter year: ");
+		year = sc.nextInt();
+		System.out.println("Enter month: ");
+		month = sc.nextInt();
+		System.out.println("Enter day: ");
+		day = sc.nextInt();
+		
+		Dates date = new Dates(year, month, day);
+		
+		while(storageArray[0].checkitem(i) != null) {
+			if((storageArray[0].checkitem(i).getDate().getYear() == year) && (storageArray[0].checkitem(i).getDate().getMonth() == month) && (storageArray[0].checkitem(i).getDate().getDay() == day)) {
+				System.out.println(storageArray[0].checkitem(i));
+			}
+			i++;
+		}
+		
+		
+	}
+	
+	public void removeTransaction() {
+		
+	}
+	
+	public void saveAndExit() {
+		
+	}
 
 	
 	public static void main(String[] args) throws Exception {
 		
 		MoneyTracker tracker = new MoneyTracker();
 		
-		tracker.menu();
+		tracker.insertTransaction();
+		
+		tracker.listTransaction();
+		
+		tracker.listTransactionByDate();
 	}
 	
 	

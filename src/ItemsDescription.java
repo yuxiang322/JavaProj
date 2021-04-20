@@ -35,7 +35,7 @@ public class ItemsDescription {
 	
 	public String toString() {
 		String str = "";
-		str += date + "," + description + "," + amount + "\n";
+		str += String.format("%5s %10s %12s \n", date, description, amount);
 		return str;
 	}
 	
