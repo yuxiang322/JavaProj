@@ -24,12 +24,30 @@ public class LTStorage {
 		return true;
 	}
 	
+	//return limit
+	public float getLimit() {
+		float limit;
+		
+		limit = ltrecords[0].getLimit();
+		
+		return limit;
+	}
+	
+	//return percentage
+	public float getPercentage() {
+		float percentage;
+		
+		percentage = ltrecords[0].getPercentage();
+		
+		return percentage;
+	}
+	
 	public String toString() {
 		String str = "";
 		for(int i = 0; i < 1; i++) {
 			if(ltrecords[i] != null) {
 				String lt = String.valueOf(ltrecords[i]);
-				str = lt;
+				str = lt; 
 			}
 		}
 		return str;

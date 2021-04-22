@@ -20,10 +20,10 @@ public class Storage {
 		}
 		
 		if((total / limit) > percentage) {
-			return true;
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 	
@@ -54,7 +54,8 @@ public class Storage {
 		}
 		
 		for(int i = 0; i < 50; i++) {
-			if(((records[i].getDate().equals(item.getDate())) && records[i].getDescription().equals(item.getDescription())) && (records[i].getAmount() == item.getAmount())) {
+			
+			if((records[i].getDescription().equals(item.getDescription())) && (records[i].getAmount() == item.getAmount()) && (records[i].getDate().getYear() == item.getDate().getYear()) && (records[i].getDate().getMonth() == item.getDate().getMonth()) && (records[i].getDate().getDay() == item.getDate().getDay())) {
 				record = records[i];
 				records[i] = null;
 				count --;

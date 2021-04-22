@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Calendar;
 import java.util.Scanner;
+
+
 import java.util.ArrayList;
 
 /* App that allow user to enter their spending
@@ -90,17 +92,13 @@ public class MoneyTracker {
 		
 	}
 	
-	public void menu() {
-		System.out.println(limitArray[0]);
-		System.out.println(storageArray[0]);
-	}
-	
 	//insert Transaction button, will automatically gets the current date.
 	public void insertTransaction() {
-		Scanner scTwo = new Scanner(System.in);
 		
 		String description;
 		float amount;
+		float limit;
+		float percentage;
 		
 		Calendar calendar = Calendar.getInstance();
 		int cyear = calendar.get(Calendar.YEAR);
@@ -109,27 +107,36 @@ public class MoneyTracker {
 		
 		Dates date = new Dates(cyear, (cmonth + 1), cday);
 		
-		System.out.println("Enter description of item: ");
-		description = sc.nextLine();
-		System.out.println("Enter cost of item: ");
-		amount = Float.parseFloat(sc.nextLine());
+		limit = limitArray[0].getLimit();
+		percentage = limitArray[0].getPercentage();
 		
-		ItemsDescription item = new ItemsDescription(date, description, amount);
+		if(storageArray[0].threshold(limit,percentage)) {
+			System.out.println("Enter description of item: ");
+			description = sc.nextLine();
+			System.out.println("Enter cost of item: ");
+			amount = Float.parseFloat(sc.nextLine());
 		
-		storageArray[0].addItem(item);
+			ItemsDescription item = new ItemsDescription(date, description, amount);
+		
+			storageArray[0].addItem(item);
+		}
+		else {
+			System.out.println("Threshold reached");
+		}
 	}
+	
 	//list all Transactions
 	public void listTransaction() {
 		System.out.println(storageArray[0]);
 	}
-	//list Transaction by the Date (try to add Items into arraylist)
+	
+	//list Transaction by the Date **(try to add Items into arraylist)**
 	public void listTransactionByDate() {
 		
 		int i = 0;
 		int year;
 		int month;
 		int day;
-		
 		
 		System.out.println("Enter year: ");
 		year = sc.nextInt();
@@ -150,9 +157,32 @@ public class MoneyTracker {
 		
 	}
 	
+	//remove transaction
 	public void removeTransaction() {
+		int year;
+		int month;
+		int day;
+		String description;
+		float amount;
 		
+		System.out.println("Enter the date of item to be removed.\n");
+		System.out.println("Year: ");
+		year = Integer.parseInt(sc.nextLine());
+		System.out.println("Month: ");
+		month = Integer.parseInt(sc.nextLine());
+		System.out.println("Day: ");
+		day = Integer.parseInt(sc.nextLine());
+		System.out.println("Enter description: ");
+		description = sc.nextLine();
+		System.out.println("Enter cost of item: ");
+		amount = Float.parseFloat(sc.nextLine());
+		
+		Dates date = new Dates(year, month, day);
+		ItemsDescription items = new ItemsDescription(date, description, amount);
+	
+		storageArray[0].removeItem(items);
 	}
+	
 	
 	public void saveAndExit() {
 		
@@ -163,11 +193,12 @@ public class MoneyTracker {
 		
 		MoneyTracker tracker = new MoneyTracker();
 		
+		tracker.listTransaction();
+		
 		tracker.insertTransaction();
 		
 		tracker.listTransaction();
 		
-		tracker.listTransactionByDate();
 	}
 	
 	
