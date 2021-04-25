@@ -98,6 +98,7 @@ public class MoneyTracker {
 		String description;
 		float amount;
 		float limit;
+		float threshold;
 		float percentage;
 		
 		Calendar calendar = Calendar.getInstance();
@@ -108,9 +109,15 @@ public class MoneyTracker {
 		Dates date = new Dates(cyear, (cmonth + 1), cday);
 		
 		limit = limitArray[0].getLimit();
-		percentage = limitArray[0].getPercentage();
+		threshold = limitArray[0].getPercentage();
+		percentage = threshold * 100;
 		
-		if(storageArray[0].threshold(limit,percentage)) {
+		if(storageArray[0].threshold(limit, threshold, cyear, cmonth, cday)) {
+			System.out.println("Warning! Daily spending is over Threshold set at: " + percentage + "%.\nDaily limit:$" + limit + "\n");
+		}
+		
+		if(storageArray[0].limitChecker(limit, cyear, cmonth, cday)) {
+			
 			System.out.println("Enter description of item: ");
 			description = sc.nextLine();
 			System.out.println("Enter cost of item: ");
@@ -119,10 +126,11 @@ public class MoneyTracker {
 			ItemsDescription item = new ItemsDescription(date, description, amount);
 		
 			storageArray[0].addItem(item);
+
 		}
 		else {
-			System.out.println("Threshold reached");
-		}
+			System.out.println("Daily spending Limit exceeded.");
+		}	
 	}
 	
 	//list all Transactions
@@ -145,7 +153,7 @@ public class MoneyTracker {
 		System.out.println("Enter day: ");
 		day = sc.nextInt();
 		
-		Dates date = new Dates(year, month, day);
+		//Dates date = new Dates(year, month, day);
 		
 		while(storageArray[0].checkitem(i) != null) {
 			if((storageArray[0].checkitem(i).getDate().getYear() == year) && (storageArray[0].checkitem(i).getDate().getMonth() == month) && (storageArray[0].checkitem(i).getDate().getDay() == day)) {
@@ -184,21 +192,89 @@ public class MoneyTracker {
 	}
 	
 	
+	public void changeLimitAndThreshold() {
+		float limit;
+		float threshold;
+		float percentage;
+		
+		System.out.println("Enter new daily limit: ");
+		limit = Float.parseFloat(sc.nextLine());
+		System.out.println("Enter new threshold percentage: ");
+		percentage = Float.parseFloat(sc.nextLine());
+		
+		threshold = percentage / 100;
+		
+		limitAndThreshold LandT = new limitAndThreshold(limit, threshold);
+		
+		limitArray[0].addLT(LandT);
+		
+		System.out.println(limitArray[0]);
+		
+	}
+	
 	public void saveAndExit() {
 		
 	}
-
+	
+	public static void menu() {
+		System.out.println("1. Add new transaction");
+		System.out.println("2. List Transaction by Date");
+		System.out.println("3. List all Transactions");
+		System.out.println("4. Remove Transacion");
+		System.out.println("5. Change limit");
+		System.out.println("6. Exit and Save");
+	}
+	
+	public static int choice() {
+		int choice = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("\nEnter Choice:");
+			choice = sc.nextInt();
+		
+			if(choice < 1 || choice > 6) {
+				System.out.println("Invalid output\n");
+				menu();
+			}
+			else {
+				break;
+			}
+		}
+		return choice;
+	}
 	
 	public static void main(String[] args) throws Exception {
-		
+		int choice = 0;
 		MoneyTracker tracker = new MoneyTracker();
 		
-		tracker.listTransaction();
+		do {
+			menu();
+			choice = choice();
 		
-		tracker.insertTransaction();
-		
-		tracker.listTransaction();
-		
+			switch(choice) {
+			case 1:
+				tracker.insertTransaction();
+				break;
+			case 2:
+				tracker.listTransactionByDate();
+				break;
+			case 3:
+				tracker.listTransaction();
+				break;
+			case 4:
+				tracker.removeTransaction();
+				break;
+			case 5:
+				tracker.changeLimitAndThreshold();;
+				break;
+			case 6:
+				tracker.saveAndExit();
+				break;
+			}
+
+		}while(choice != 6);
+
 	}
 	
 	

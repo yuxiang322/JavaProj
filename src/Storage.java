@@ -10,38 +10,42 @@ public class Storage {
 	
 	
 	//Check whether spending is above threshold
-	public boolean threshold(float limit, float percentage) {
+	public boolean threshold(float limit, float threshold, int cyear, int cmonth, int cday) {
 		float total = 0;
 		
 		for(int i = 0; i < 50; i++) {
 			if(records[i] != null) {
-				total += records[i].getAmount();
+				if(records[i].getDate().getYear() == cyear && (records[i].getDate().getMonth() == (cmonth + 1)) && (records[i].getDate().getDay() == cday)) {
+					total += records[i].getAmount();
+				}
 			}
 		}
 		
-		if((total / limit) > percentage) {
-			return false;
+		if((total / limit) > threshold) {
+			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 	}
 	
 	//Check whether limit is reached
-	public boolean limitChecker(float limit) {
+	public boolean limitChecker(float limit, int cyear, int cmonth, int cday) {
 		float total = 0;
 		
 		for(int i = 0; i < 50; i++) {
 			if(records[i] != null) {
-				total += records[i].getAmount();
+				if(records[i].getDate().getYear() == cyear && (records[i].getDate().getMonth() == (cmonth + 1)) && (records[i].getDate().getDay() == cday)) {
+					total += records[i].getAmount();
+				}
 			}
 		}
 		
 		if(total > limit) {
-			return true;
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 	

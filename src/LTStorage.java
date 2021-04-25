@@ -1,23 +1,17 @@
 
 public class LTStorage {
 	private limitAndThreshold ltrecords[];
-	private int count;
 	
 	public LTStorage() {
 		ltrecords = new limitAndThreshold[1];
-		count = 0;
 	}
 	
 	//add Limit and threshold
 	public boolean addLT(limitAndThreshold ltrecord) {
-		if(count == 1) {
-			return false;
-		}
 		
-		for(int i = 0; i < 1; i++) {
-			if(ltrecords[i] == null) {
+		for(int i = 0; i < 1;) {
+			if(ltrecords[i] == null || ltrecords[i] != null) {
 				ltrecords[i] = ltrecord;
-				count++;
 				break;
 			}
 		}
@@ -35,11 +29,11 @@ public class LTStorage {
 	
 	//return percentage
 	public float getPercentage() {
-		float percentage;
+		float threshold;
 		
-		percentage = ltrecords[0].getPercentage();
+		threshold = ltrecords[0].getThreshold();
 		
-		return percentage;
+		return threshold;
 	}
 	
 	public String toString() {
