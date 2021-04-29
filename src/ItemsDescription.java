@@ -39,5 +39,11 @@ public class ItemsDescription {
 		return str;
 	}
 	
+	public String write() {
+		String str = "";
+		str += date + "," + description + "," + amount;
+		return str;
+	}
+	
 	
 }

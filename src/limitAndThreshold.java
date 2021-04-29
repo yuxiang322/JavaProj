@@ -30,7 +30,18 @@ public class limitAndThreshold {
 		String lmt = String.valueOf(limit);
 		String perc = String.valueOf(threshold);
 		
-		str = "$"+ lmt + ", " + perc + "\n";
+		str = "$" + lmt + ", " + perc + "\n";
 		return str;
 	}
+	
+	public String write() {
+		String str = "";
+		String lmt = String.valueOf(limit);
+		String perc = String.valueOf(threshold);
+		
+		str = lmt + ", " + perc;
+		
+		return str;
+	}
+	
 }

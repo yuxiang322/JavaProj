@@ -212,8 +212,18 @@ public class MoneyTracker {
 		
 	}
 	
-	public void saveAndExit() {
+	public void saveAndExit() throws IOException {
+		File file = new File("Records.txt");
+		FileWriter writer = new FileWriter(file);
+		BufferedWriter bw = new BufferedWriter(writer);
+		bw.write(storageArray[0].write());
+		bw.close();
 		
+		File filetwo = new File("Threshold.txt");
+		FileWriter writertwo = new FileWriter(filetwo);
+		BufferedWriter bwtwo = new BufferedWriter(writertwo);
+		bwtwo.write(limitArray[0].write());
+		bwtwo.close();
 	}
 	
 	public static void menu() {

@@ -46,4 +46,14 @@ public class LTStorage {
 		}
 		return str;
 	}
+	
+	public String write() {
+		String str = "";
+		for(int i = 0; i < 1; i++) {
+			if(ltrecords[i] != null) {
+				str = ltrecords[i].write();
+			}
+		}
+		return str;
+	}
 }

@@ -106,4 +106,13 @@ public class Storage {
 		return str;
 	}
 	
+	public String write() {
+		String str = "";
+		for(int i  = 0; i < 50; i++) {
+			if(records[i] != null) {
+				str += records[i].write() + "\n";
+			}
+		}
+		return str;
+	}
 }
