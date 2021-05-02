@@ -23,7 +23,7 @@ import java.util.ArrayList;
 //function to write user prompt into file
 //function to display records based on dates
 //implement GUI
-
+/*
 public class MoneyTracker {
 	private Storage storageArray[];
 	private LTStorage limitArray[];
@@ -289,3 +289,4 @@ public class MoneyTracker {
 	
 	
 }
+*/
