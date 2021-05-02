@@ -100,6 +100,7 @@ public class TrackerGUI {
 			
 			limitArray[0].addLT(LandT);
 		}
+		br.close();
 	}
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -508,6 +509,7 @@ public class TrackerGUI {
 				int day;
 				String Description;
 				float amount;
+				
 				// read from storage
 				try {
 					readFromStorage();
