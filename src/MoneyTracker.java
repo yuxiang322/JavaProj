@@ -23,7 +23,9 @@ import java.util.ArrayList;
 //function to write user prompt into file
 //function to display records based on dates
 //implement GUI
+
 /*
+
 public class MoneyTracker {
 	private Storage storageArray[];
 	private LTStorage limitArray[];
@@ -106,7 +108,7 @@ public class MoneyTracker {
 		int cmonth = calendar.get(Calendar.MONTH);
 		int cday = calendar.get(Calendar.DAY_OF_MONTH);
 		
-		Dates date = new Dates(cyear, (cmonth + 1), cday);
+		Dates date = new Dates(cday, (cmonth + 1), cyear);
 		
 		limit = limitArray[0].getLimit();
 		threshold = limitArray[0].getPercentage();
@@ -185,7 +187,7 @@ public class MoneyTracker {
 		System.out.println("Enter cost of item: ");
 		amount = Float.parseFloat(sc.nextLine());
 		
-		Dates date = new Dates(year, month, day);
+		Dates date = new Dates(day, month, year);
 		ItemsDescription items = new ItemsDescription(date, description, amount);
 	
 		storageArray[0].removeItem(items);

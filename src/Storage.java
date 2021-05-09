@@ -50,7 +50,7 @@ public class Storage {
 	}
 	
 	//removing transactions
-	public ItemsDescription removeItem(int year, int month, int day, String description, float amount) {
+	public ItemsDescription removeItems(ItemsDescription item) {
 		ItemsDescription record = null;
 	
 		if(count == 0) {
@@ -58,13 +58,13 @@ public class Storage {
 		}
 		
 		for(int i = 0; i < 50; i++) { 
-			
-			if((records[i].getDescription().equals(description)) && (records[i].getAmount() == amount) && (records[i].getDate().getYear() == year) && (records[i].getDate().getMonth() == month) && (records[i].getDate().getDay() == day)) {
+			if((records[i].getDescription().equals(item.getDescription())) && (records[i].getAmount() == item.getAmount()) && (records[i].getDate().getYear() == item.getDate().getYear()) && (records[i].getDate().getMonth() == item.getDate().getMonth()) && (records[i].getDate().getDay() == item.getDate().getDay())) {
 				record = records[i];
 				records[i] = null;
 				count --;
 				break;
-			}
+		}
+			
 		}
 		return record;
 	}

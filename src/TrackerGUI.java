@@ -43,6 +43,7 @@ public class TrackerGUI {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -154,14 +155,13 @@ public class TrackerGUI {
 	
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//remove transaction
-	public void removeTransaction(int year, int month, int day, String description, float amount) {
+	public void removeItem(ItemsDescription item) {
 
 		//Dates date = new Dates(year, month, day);
 		//ItemsDescription items = new ItemsDescription(date, description, amount);
 		
-		storageArray[0].removeItem(year, month, day, description, amount);
+		storageArray[0].removeItems(item);
 	}
-
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 
@@ -189,6 +189,7 @@ public class TrackerGUI {
 	 * Initialize the contents of the frame.
 	 * @throws Exception 
 	 */
+
 	private void initialize() throws Exception{
 		// read from storage for limit and threshold
 		readFromStorage();
@@ -521,14 +522,16 @@ public class TrackerGUI {
 				//get from text field
 				year = Integer.parseInt(textYear.getText());
 				month = Integer.parseInt(textMonth.getText());
-				day = Integer.parseInt(textMonth.getText());
+				day = Integer.parseInt(textDay.getText());
 				
 				Description = textDescriptionRemove.getText();
 				
 				amount = Float.parseFloat(textAmountRemove.getText());
 				
+				Dates date = new Dates(day, month, year);
+				ItemsDescription item = new ItemsDescription (date, Description, amount);
 				// remove transaction
-				removeTransaction(year, month, day, Description, amount);
+				removeItem(item);
 				
 				//save after remove
 				try {
