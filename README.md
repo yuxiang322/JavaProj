@@ -1,3 +1,2 @@
 # Tracker Proj
-Eclipse IDE
-First personal project use to learn more on JAVA and also JAVA GUI
+First personal project use to learn more on JAVA and also JAVA GUI. Project in master branch.
